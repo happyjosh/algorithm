@@ -24,8 +24,39 @@ function climbingStairs(n) {
   return total;
 }
 
+/**
+ * 带备忘录的递归解法
+ * @param n
+ * @return {number|*}
+ */
+function climbingStairs2(n) {
+  if (typeof n !== 'number') {
+    return 0;
+  }
+
+  if (n < 3) {
+    return n;
+  }
+
+  const memo = new Array(n).fill(0);
+  memo[1] = 1;
+  memo[2] = 2;
+
+  return innerHelper(memo, n);
+}
+
+function innerHelper(memo, i) {
+  if (memo[i]) {
+    return memo[i];
+  }
+
+  memo[i] = innerHelper(memo, i - 1) + innerHelper(memo, i - 2);
+
+  return memo[i];
+}
+
 (function () {
   console.log('-------------------begin--------------------');
-  console.log(climbingStairs(10));
+  console.log(climbingStairs(100));
   console.log('-------------------end--------------------');
 })();

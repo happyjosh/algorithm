@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "es2015", "es2016", "es2017", "es2020"],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "experimentalDecorators": true,
+    "useDefineForClassFields": true,
+    "jsx": "react",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "baseUrl": "./",
+    "strict": true,
+    "strictNullChecks": true,
+    "downlevelIteration": true,
+    "paths": {
+      "@/*": ["src/*"],
+      "@@/*": ["src/.umi/*"]
+    },
+    "allowSyntheticDefaultImports": true
+  },
+  "linterOptions": {
+    "exclude": ["./**/*.svg"]
+  },
+  "include": [
+    "mock/**/*",
+    "src/**/*",
+    "config/**/*",
+    ".umirc.ts",
+    "typings.d.ts"
+  ]
+}

@@ -1,26 +1,48 @@
+// /**
+//  * 快慢指针
+//  * https://leetcode.com/problems/linked-list-cycle-ii/
+//  */
+// function detectCycle(head: ListNode | null): ListNode | null {
+//   let slow: ListNode | null = head;
+//   let fast: ListNode | null = head;
+//   do {
+//     if (!fast || !fast.next) {
+//       return null;
+//     }
+//     slow = slow?.next ?? null;
+//     fast = fast?.next.next;
+//   } while (fast !== slow);
+//
+//   fast = head;
+//   while (fast !== slow) {
+//     slow = slow?.next??null;
+//     fast = fast?.next??null;
+//   }
+//
+//   return fast;
+// }
+
 /**
- * Definition for singly-linked list.
- * 快慢指针
+ * hashset的方式
  * https://leetcode.com/problems/linked-list-cycle-ii/
+ * @param head
  */
 function detectCycle(head: ListNode | null): ListNode | null {
-  let slow: ListNode | null = head;
-  let fast: ListNode | null = head;
-  do {
-    if (!fast || !fast.next) {
-      return null;
+  if (!head) {
+    return null;
+  }
+  const visited = new Set<ListNode>();
+  let cursor = head;
+  visited.add(cursor);
+  while (cursor.next) {
+    cursor = cursor.next;
+    if (visited.has(cursor)) {
+      return cursor;
     }
-    slow = slow?.next ?? null;
-    fast = fast?.next.next;
-  } while (fast !== slow);
-
-  fast = head;
-  while (fast !== slow) {
-    slow = slow?.next??null;
-    fast = fast?.next??null;
+    visited.add(cursor);
   }
 
-  return fast;
+  return null;
 }
 
 class ListNode {

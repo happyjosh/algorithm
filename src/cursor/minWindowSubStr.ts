@@ -6,30 +6,24 @@
  */
 function minWindow(s: string, t: string): string {
   const tCharMap = new Map<string, number>();
-  const subCharMap = new Map<string, number>();
+  const windowCharMap = new Map<string, number>();
   for (const c of t) {
     tCharMap.set(c, (tCharMap.get(c) ?? 0) + 1);
   }
 
   let l = 0;
-  let r = 1;
+  let r = 0;
 
   let resL = 0;
   let resR = 0;
 
   while (r <= s.length && l < s.length) {
     const isNotContain = () => {
-      if (r - l < t.length) {
+      if (windowCharMap.size < tCharMap.size) {
         return true;
       }
-      subCharMap.clear();
-      for (let i = l; i < r; i++) {
-        const c = s.charAt(i);
-        subCharMap.set(c, (subCharMap.get(c) ?? 0) + 1);
-      }
-
       for (const [k, v] of tCharMap) {
-        const subV = subCharMap.get(k) ?? 0;
+        const subV = windowCharMap.get(k) ?? 0;
         if (v > subV) {
           return true;
         }
@@ -39,11 +33,19 @@ function minWindow(s: string, t: string): string {
 
     if (isNotContain()) {
       r++;
+
+      const c = s[r - 1];
+      tCharMap.has(c) && windowCharMap.set(c, (windowCharMap.get(c) ?? 0) + 1);
     } else {
       if (resR === 0 || r - l < resR - resL) {
         resL = l;
         resR = r;
       }
+
+      const c = s[l];
+      windowCharMap.has(c) &&
+        windowCharMap.set(c, (windowCharMap.get(c) ?? 0) - 1);
+
       l++;
     }
   }

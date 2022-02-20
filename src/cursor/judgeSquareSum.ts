@@ -21,6 +21,17 @@ function judgeSquareSum(c: number): boolean {
   return false;
 }
 
+function judgeSquareSum2(c: number): boolean {
+  for (let i = 0; i <= Math.sqrt(c); i++) {
+    const right = Math.sqrt(c - Math.pow(i, 2));
+    if (right === Math.floor(right)) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 console.log('-------------------begin--------------------res');
-console.log(judgeSquareSum(4));
+console.log(judgeSquareSum(5));
 console.log('-------------------end--------------------');

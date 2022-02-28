@@ -4,7 +4,7 @@
  * @param nums
  * @param target
  */
-function searchRange2(nums: number[], target: number): number[] {
+function searchRange_2(nums: number[], target: number): number[] {
   let res = [-1, -1];
   const left = binarySearch(nums, target, true); // 第一个>=target的位置
   const right = binarySearch(nums, target) - 1; // 第一个>target的位置-1
@@ -36,5 +36,5 @@ function binarySearch(nums: number[], target: number, lower?: boolean): number {
 }
 
 console.log('-------------------begin--------------------res');
-console.log(searchRange2([5, 7, 7, 8, 8, 10], 8));
+console.log(searchRange_2([5, 7, 7, 8, 8, 10], 8));
 console.log('-------------------end--------------------');

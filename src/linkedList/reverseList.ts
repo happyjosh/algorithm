@@ -20,19 +20,31 @@ function reverseList(head: ListNode | null): ListNode | null {
     return null;
   }
 
-  let cursor = head;
-  let next = head.next;
+  let pre = null;
+  let cursor: ListNode | null = head;
 
-  while (!!next) {
-    let pre = cursor;
-    cursor = next;
-    next = next?.next;
+  while (!!cursor) {
+    const next: ListNode | null = cursor.next;
     cursor.next = pre;
+    pre = cursor;
+    cursor = next;
   }
 
-  head.next = null;
+  return pre;
 
-  return cursor;
+  // let cursor = head;
+  // let next = head.next;
+  //
+  // while (!!next) {
+  //   let pre = cursor;
+  //   cursor = next;
+  //   next = next?.next;
+  //   cursor.next = pre;
+  // }
+  //
+  // head.next = null;
+  //
+  // return cursor;
 }
 //mock 链表数据
 const nodes = [1, 2, 3, 4, 5].map((item) => new ListNode(item));

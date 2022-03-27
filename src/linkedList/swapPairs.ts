@@ -51,3 +51,42 @@ function swapPairs(head: ListNode | null): ListNode | null {
 console.log('-------------------begin--------------------res');
 console.log(swapPairs(mockLinkedList([1, 2, 3, 4])));
 console.log('-------------------end--------------------');
+
+//---------------------------------------
+
+/**
+ * 递归的方式
+ * @param head
+ */
+function swapPairs_2(head: ListNode | null): ListNode | null {
+  // Input:pre- 1->2->3->4
+  // Output:pre- 2->1->4->3
+
+  let pre = new ListNode(-1);
+  pre.next = head;
+
+  subSwap(pre);
+
+  return pre.next;
+}
+
+function subSwap(pre: ListNode) {
+  const a = pre.next;
+
+  if (!a) {
+    return;
+  }
+
+  const b = a.next;
+
+  if (!b) {
+    return;
+  }
+  const c = b.next;
+
+  pre.next = b;
+  b.next = a;
+  a.next = c;
+
+  subSwap(a);
+}
